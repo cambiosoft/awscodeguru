@@ -23,7 +23,6 @@ public class CustomerController {
         this.customerRepository = customerRepository;
     }
 
-
     @RequestMapping(value = "/customerList", method = RequestMethod.GET)
     public String findAll(Model model) {
         List<Customer> customerList = customerRepository.findAll();
@@ -56,7 +55,8 @@ public class CustomerController {
     public String insert(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         Customer customer = new Customer();
         customer.setFirstName(firstName);
-        customer.setLastName(lastName);
+        customer.setLastName(null);
+        customerRepository.save(customer);
         customerRepository.save(customer);
         return "redirect:customerList.do";
     }
